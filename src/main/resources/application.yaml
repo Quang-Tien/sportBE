@@ -1,0 +1,29 @@
+server:
+  port: 5000
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    url: jdbc:postgresql://localhost:5432/sportyfind
+    password: scoinvn123
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: 'true'
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: false
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 733340652350-oph3ctvvbj1duss6tb0cvgedm95gobqa.apps.googleusercontent.com
+            client-secret: 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
+            redirect-uri:
+            scope:
+              - email
+              - profile

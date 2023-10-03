@@ -1,5 +1,6 @@
 package com.sportyfind.webapi.entities;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,6 +11,7 @@ import java.util.Date;
 @Entity
 @Getter
 @Setter
+@AllArgsConstructor
 @Table(name = "fieldbooking")
 public class FieldBookingEntity {
     @Id

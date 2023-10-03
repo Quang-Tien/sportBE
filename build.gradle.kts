@@ -7,7 +7,7 @@ plugins {
 
 group = "com.sportyfind"
 version = "0.0.1-SNAPSHOT"
-java.sourceCompatibility = JavaVersion.VERSION_17
+//java.sourceCompatibility = JavaVersion.VERSION_17
 
 repositories {
     mavenCentral()
@@ -16,6 +16,10 @@ repositories {
 
 dependencies {
     implementation(kotlin("stdlib"))
+
+    // OAuth2
+    implementation("org.springframework.boot:spring-boot-starter-oauth2-client:3.1.1")
+
 
     // Spring Security
     implementation("org.springframework.boot:spring-boot-starter-security")

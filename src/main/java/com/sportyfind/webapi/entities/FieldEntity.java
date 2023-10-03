@@ -7,6 +7,8 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "field")
 public class FieldEntity {
     @Id

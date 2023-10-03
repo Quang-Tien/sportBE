@@ -2,7 +2,9 @@ package com.sportyfind.webapi.config;
 
 import com.sportyfind.webapi.jwt.JwtAuthenticationEntryPoint;
 import com.sportyfind.webapi.jwt.JwtAuthenticationFilter;
+import com.sportyfind.webapi.oauth2.OAuth2LoginSuccessHandler;
 import com.sportyfind.webapi.services.CustomUserDetailService;
+import com.sportyfind.webapi.services.CustomerOAuth2UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -54,9 +56,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler)
                 .and()
+                .oauth2Login()
+                    .loginPage("/oauth_login")
+                    .userInfoEndpoint()
+                    .userService(oAuth2UserService)
+                .and()
+                .successHandler(oAuth2LoginSuccessHandler)
+                .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .authorizeRequests().antMatchers("/auth/**").permitAll()
+                .authorizeRequests().antMatchers("/auth/**",  "/login/**").permitAll()
                 .anyRequest().authenticated();
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
     }
@@ -71,4 +80,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // Password encoder, để Spring Security sử dụng mã hóa mật khẩu người dùng
         return new BCryptPasswordEncoder();
     }
+
+    @Autowired
+    private CustomerOAuth2UserService oAuth2UserService;
+
+    @Autowired
+    private OAuth2LoginSuccessHandler oAuth2LoginSuccessHandler;
 }
